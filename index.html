@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Signature Generator</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;background:#f7f7fb;color:#111}
+.wrap{display:grid;grid-template-columns:340px 1fr;gap:18px}
+.card{background:#fff;border:1px solid #e7e7ef;border-radius:14px;padding:16px}
+label{display:block;font-size:12px;color:#555;margin:10px 0 6px}
+input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:14px}
+button{padding:10px 12px;border:0;border-radius:10px;background:#2563eb;color:#fff;cursor:pointer}
+.previewBox{overflow:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<label>Name</label><input id="name" value="Salim"/>
+<label>Title</label><input id="title" value="Motion Designer"/>
+<label>Phone</label><input id="phone" value="+201000000000"/>
+<label>Email</label><input id="email" value="Hello@salman-art.me"/>
+<label>Location</label><input id="loc" value="Giza, Egypt"/>
+<button onclick="copyHTML()">Copy HTML</button>
+</div>
+<div class="card previewBox">
+<div id="preview"></div>
+</div>
+</div>
+<script>
+function render(){
+const h = `<table cellpadding='0' cellspacing='0' style='font-family:Arial'>
+<tr><td>
+<b style='color:#2563eb'>${name.value}</b><br>
+${title.value}<br>
+<a href='tel:${phone.value}'>${phone.value}</a><br>
+<a href='mailto:${email.value}'>${email.value}</a><br>
+${loc.value}
+</td></tr></table>`;
+preview.innerHTML=h;
+return h;
+}
+document.querySelectorAll("input").forEach(i=>i.oninput=render);
+render();
+function copyHTML(){navigator.clipboard.writeText(render());}
+</script>
+</body>
+</html>
